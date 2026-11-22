@@ -1,0 +1,19 @@
+# Notes, early drafts, sources: never public
+drafts/
+
+# Written by variants.sh at run time
+prompt.txt
+
+# Python
+__pycache__/
+.venv/
+
+# Secrets / local config
+.env
+.env.*
+
+# Editor / tools (also ignored globally, kept here for anyone cloning)
+.vscode/
+.idea/
+.claude/
+CLAUDE.md

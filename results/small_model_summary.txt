@@ -1,0 +1,130 @@
+
+=== cuda
+run    300 runs:  1 texts (top 300x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.69 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         second half: 1 texts, 1 logprob sets
+seq_1   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.69 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_2   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.69 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_3   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.69 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+nolp    10 runs:  1 texts (top 10x), median 1.60 s
+  text   AAAAAAAAAA
+fresh   20 runs:  1 texts (top 20x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.72 s
+  text   AAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAA
+noise  100 runs:  1 texts (top 100x),  4 logprob sets, max |dlogprob| vs run#1 0.023, median 2.18 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     BBBCBBBBCDBBBBBBBBBBBBCCCBBBBBBCBBBCEBBBBBBBBBCCBB CCBBBBBBBBBBBBCBBBBBBBBBCBBBBBBBCBBBBBBBDCCBBBBCCB
+         second half: 1 texts, 3 logprob sets
+slots4 100 runs:  1 texts (top 100x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.69 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         second half: 1 texts, 1 logprob sets
+seq identical across fresh starts: texts True, logprobs True
+run[:32] equals seq_1 (texts): True
+control nolp == seq_1[:10] (texts): True
+closest call in run 1: token 196, gap 0.06 pp, ' The' 28.18 %, ' You' 28.12 %
+
+=== vllm_bi
+run    300 runs:  1 texts (top 300x),  1 logprob sets, max |dlogprob| vs run#1 0, median 3.25 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         second half: 1 texts, 1 logprob sets
+seq_1   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 3.24 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_2   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 3.25 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_3   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 3.25 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+nolp    10 runs:  1 texts (top 10x), median 3.21 s
+  text   AAAAAAAAAA
+noise  100 runs:  1 texts (top 100x),  1 logprob sets, max |dlogprob| vs run#1 0, median 3.24 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         second half: 1 texts, 1 logprob sets
+seq identical across fresh starts: texts True, logprobs True
+run[:32] equals seq_1 (texts): True
+control nolp == seq_1[:10] (texts): True
+closest call in run 1: token 196, gap 0.44 pp, ' The' 28.19 %, ' You' 27.75 %
+
+=== vllm_default
+run    300 runs:  1 texts (top 300x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.62 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+         second half: 1 texts, 1 logprob sets
+seq_1   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.62 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_2   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.62 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+seq_3   32 runs:  1 texts (top 32x),  1 logprob sets, max |dlogprob| vs run#1 0, median 1.62 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+nolp    10 runs:  1 texts (top 10x), median 1.59 s
+  text   AAAAAAAAAA
+noise  100 runs:  1 texts (top 100x),  2 logprob sets, max |dlogprob| vs run#1 0.0165, median 1.70 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     BBBBBBBBBCBCBBBBBBBCBBBBBBBBBBBBBBBCBCBBBBBBBBBBCB CBBBBCBBBBBBBBCBBBBCBBCBBBBBBBBBCBBCCCBBBBBBBCCBCB
+         second half: 1 texts, 2 logprob sets
+seq identical across fresh starts: texts True, logprobs True
+run[:32] equals seq_1 (texts): True
+control nolp == seq_1[:10] (texts): True
+closest call in run 1: token 155, gap 0.00 pp, '.' 45.75 %, ' of' 45.75 %
+
+=== vulkan
+run    300 runs:  1 texts (top 300x),  5 logprob sets, max |dlogprob| vs run#1 0.0529, median 4.54 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     ABCDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+         second half: 1 texts, 1 logprob sets
+seq_1   32 runs:  1 texts (top 32x),  5 logprob sets, max |dlogprob| vs run#1 0.0529, median 4.54 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     ABCDEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+seq_2   32 runs:  1 texts (top 32x),  5 logprob sets, max |dlogprob| vs run#1 0.0529, median 4.52 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     ABCDEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+seq_3   32 runs:  1 texts (top 32x),  5 logprob sets, max |dlogprob| vs run#1 0.0529, median 4.52 s
+  text   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  lp     ABCDEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+nolp    10 runs:  1 texts (top 10x), median 4.34 s
+  text   AAAAAAAAAA
+fresh   20 runs:  1 texts (top 20x),  1 logprob sets, max |dlogprob| vs run#1 0, median 4.58 s
+  text   AAAAAAAAAAAAAAAAAAAA
+  lp     AAAAAAAAAAAAAAAAAAAA
+noise  100 runs:  2 texts (top 97x), 18 logprob sets, max |dlogprob| vs run#1 0.0757, median 10.44 s
+  text   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB BBBBBBBBBBBBBBBBBBBBBBBBBBBBBCBBBBCBBBBBBBBBCBBBBB
+  lp     FGHIJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ JJJJJJJJJJJJJJJJJJJJJJJJJJJJJKLMNJOPQRSJJJJJTUVWSJ
+         second half: 2 texts, 14 logprob sets
+slots4 100 runs:  1 texts (top 100x),  5 logprob sets, max |dlogprob| vs run#1 0.033, median 4.54 s
+  text   CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+  lp     XYZabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+         second half: 1 texts, 1 logprob sets
+seq identical across fresh starts: texts True, logprobs True
+run[:32] equals seq_1 (texts): True
+control nolp == seq_1[:10] (texts): True
+closest call in run 1: token 157, gap 0.22 pp, ' strange' 32.59 %, ' script' 32.37 %
+
+=== first request after a fresh start, across setups
+cuda         vs vllm_bi     : same text True, common tokens 200, max |dlogprob| on them 0.0269
+cuda         vs vllm_default: same text False, common tokens 155, max |dlogprob| on them 0.0216
+cuda         vs vulkan      : same text False, common tokens 157, max |dlogprob| on them 0.0612
+vllm_bi      vs vllm_default: same text False, common tokens 155, max |dlogprob| on them 0.0167
+vllm_bi      vs vulkan      : same text False, common tokens 157, max |dlogprob| on them 0.0751
+vllm_default vs vulkan      : same text False, common tokens 155, max |dlogprob| on them 0.0694
+
+=== last request of run (settled state), across setups
+cuda         vs vllm_bi     : same text True, common tokens 200, max |dlogprob| on them 0.0269
+cuda         vs vllm_default: same text False, common tokens 155, max |dlogprob| on them 0.0216
+cuda         vs vulkan      : same text False, common tokens 157, max |dlogprob| on them 0.0487
+vllm_bi      vs vllm_default: same text False, common tokens 155, max |dlogprob| on them 0.0167
+vllm_bi      vs vulkan      : same text False, common tokens 157, max |dlogprob| on them 0.0625
+vllm_default vs vulkan      : same text False, common tokens 155, max |dlogprob| on them 0.0569

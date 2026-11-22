@@ -1,0 +1,27 @@
+# Re-measurement of the near-tie values and the flash-attention probe cited in the article.
+# Each block runs on a freshly started llama-server; the values shift with the server's history.
+# near_tie.py feeds prompt + first N tokens of the first run in the given file as one prompt (prompt-processing path).
+# probe.py uses the short prompt "The lighthouse keeper opened the bottle and found" (no chat template).
+# 2026-11-21T23:06:27+01:00, AMD Strix Halo test machine (see README), llama.cpp 749db7f, Qwen3-8B-Q4_K_M, -ngl 99 -c 16384 --parallel 1
+## near_tie.py results/s6_t0_fresh.jsonl 102  (first request on a fresh server, flash attention on)
+...' stood tall, its light had dimmed with time. Elias' ->
+        ' had'  logprob -0.850591  p = 42.716 %
+       ' kept'  logprob -0.869082  p = 41.934 %
+       ' took'  logprob -3.478700  p = 3.085 %
+           ','  logprob -3.730628  p = 2.398 %
+  ' maintained'  logprob -3.917974  p = 1.988 %
+## near_tie.py results/s4_t0_cache.jsonl 112  (first request on a fresh server, flash attention on)
+...'. Elias kept it running, not for the tourists or the' ->
+      ' coast'  logprob -1.701293  p = 18.245 %
+      ' ships'  logprob -1.732936  p = 17.676 %
+  ' government'  logprob -2.345908  p = 9.576 %
+       ' maps'  logprob -2.534173  p = 7.933 %
+        ' mar'  logprob -2.962697  p = 5.168 %
+## probe.py, 3 probes, fresh server, flash attention on
+0 ' a':-0.582886457  ' that':-2.319409132  ' the':-2.633520842
+1 ' a':-0.582886457  ' that':-2.319409132  ' the':-2.633520842
+2 ' a':-0.582886457  ' that':-2.319409132  ' the':-2.633520842
+## probe.py, 3 probes, fresh server, flash attention off
+0 ' a':-0.596516788  ' that':-2.311265230  ' the':-2.576821566
+1 ' a':-0.596516788  ' that':-2.311265230  ' the':-2.576821566
+2 ' a':-0.596516788  ' that':-2.311265230  ' the':-2.576821566
