@@ -255,7 +255,8 @@ Observations:
 
 | Date | Medium | Version | Tag | Link |
 |---|---|---|---|---|
-| – | – | – | – | not published yet |
+| 2026-11-22 | LinkedIn article | 1 | `v1.0` | [Gleiche Frage, andere Antwort](https://www.linkedin.com/pulse/gleiche-frage-andere-antwort-kann-man-ein-llm-stefan-schmidbauer-mz2be/) |
+| 2026-11-22 | LinkedIn post | 1 | `v1.0` | [Post](https://www.linkedin.com/posts/stefan-schmidbauer_man-stellt-einem-llm-zweimal-dieselbe-frage-ugcPost-7530214446556811265-KxiY/) |
 
 ## Reproduce
 

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.14" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>linkedin_article</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      color: light-dark(#1a1a1a, #fdfdfd);
+      background-color: #fdfdfd;
+      background-color: light-dark(#fdfdfd, #1a1a1a);
+      color-scheme: light dark;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a, a:visited {
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid;
+      border-color: #e6e6e6;
+      border-color: light-dark(#e6e6e6, #4c4c4c);
+      color: #606060;
+      color: light-dark(#606060, #b6b6b6);
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+    }
+    th {
+      border-top: 1px solid currentColor;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    em, em em em, em em em em em {
+      font-style: italic;
+    }
+    em em, em em em em {
+      font-style: normal;
+    }
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    @media print {
+      html {
+        color-scheme: light only;
+      }
+      html, body, pre, code {
+        background-color: transparent;
+      }
+      body, a, a:visited, blockquote {
+        color: black;
+      }
+      pre, code {
+        padding: 0;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }  </style>
+</head>
+<body>
+<h1
+id="gleiche-frage-andere-antwort-kann-man-ein-llm-deterministisch-betreiben">Gleiche
+Frage, andere Antwort: Kann man ein LLM deterministisch betreiben?</h1>
+<p>Temperatur null, fester Seed, identischer Prompt. Und trotzdem eine
+andere Antwort. Ich wollte wissen, woran das liegt, und habe es zusammen
+mit Claude nachgemessen.</p>
+<h2 id="die-frage">Die Frage</h2>
+<p>Auf einem Meetup zu angewandter KI kam beim Networking eine
+Diskussion auf, die mich nicht losgelassen hat: Kann man ein großes
+Sprachmodell dazu bringen, jedes Mal exakt dieselbe Antwort zu
+geben?</p>
+<p>Die Frage war nicht akademisch. Einer aus der Runde arbeitete in der
+Finanzbranche. Automatisch erzeugte Ergebnisse müssen dort für Prüfungen
+nachvollziehbar sein. „Haben wir probiert“, sagte er. „Temperatur null,
+fester Seed, identischer Prompt. Trotzdem verschiedene Antworten.“</p>
+<p>Dagegen stand ein einfaches Argument: Ein LLM ist im Kern eine Kette
+von Matrixmultiplikationen. Gleiche Eingabe, gleiche Gewichte, gleiche
+Parameter. Mathematik ist Mathematik, da muss jedes Mal dasselbe
+herauskommen.</p>
+<p>Ich war auf der Seite der Mathematik, konnte mir seine Beobachtung
+aber nicht erklären. Also haben wir es ausprobiert, Claude und ich: auf
+eigener Hardware, mit offenen Modellen, in über 3.000 Messläufen.</p>
+<p>Den Plan habe ich vorgegeben: erst der Normalbetrieb, dann Temperatur
+null, dann den möglichen Ursachen einzeln nachgehen. Unterwegs kamen die
+Ideen mal von mir, mal von Claude. Claude hat die Messskripte
+geschrieben, die Läufe ausgewertet und die Quellen mitrecherchiert. Die
+Gegenproben mit einem zweiten Modell und auf einer NVIDIA-Karte habe ich
+dazugenommen. Was in diesen Text kommt, habe ich entschieden. Wenn im
+Folgenden „wir“ steht, sind Claude und ich gemeint.</p>
+<p>Vorweg: Beide Seiten hatten recht. Warum das so ist und was man tun
+kann, zeigen wir Schritt für Schritt, jede mögliche Ursache mit einer
+eigenen Messung. Eine davon, das „Gedächtnis“ des Servers, konnten wir
+eingrenzen, aber nicht bis ins Letzte aufklären.</p>
+<h2 id="was-die-forschung-sagt">Was die Forschung sagt</h2>
+<p>Neu ist die Frage nicht. <strong>Thinking Machines</strong> schickte
+2025 tausendmal dieselbe Anfrage mit Temperatur null an ein großes
+Qwen3-Modell und bekam 80 verschiedene Antworten. <strong>Yuan et
+al.</strong> (2025) zeigen, dass schon die Zahl der gemeinsam
+verarbeiteten Anfragen, die Zahl der GPUs oder der GPU-Typ die Antworten
+verändern. <strong>Ingonyama</strong> (2024) hat llama.cpp so umgebaut,
+dass es auf verschiedenen NVIDIA-GPUs identische Ausgaben liefert. Dafür
+fiel die Verarbeitung des Prompts (gemessen auf einer RTX 4080) von 302
+auf 43 Tokens pro Sekunde.</p>
+<p>Uns hat interessiert, ob sich das auf eigener Hardware nachvollziehen
+lässt und welche Ursache wie viel ausmacht.</p>
+<h2 id="der-versuchsaufbau">Der Versuchsaufbau</h2>
+<ul>
+<li><strong>Hardware:</strong> ein Mini-PC mit AMD Strix Halo
+(Grafikeinheit Radeon 8060S) und 128 GB Arbeitsspeicher</li>
+<li><strong>Software:</strong> llama.cpp, eine verbreitete
+Open-Source-Software, um Sprachmodelle lokal zu betreiben. Sie lief als
+Server, so wie ihn auch eine Anwendung ansprechen würde, und rechnete
+über die Grafikschnittstelle Vulkan, mit eingeschaltetem Flash
+Attention.</li>
+<li><strong>Modell:</strong> Qwen3-8B, ein offenes Modell mit 8
+Milliarden Parametern, auf 4 Bit komprimiert (Q4_K_M)</li>
+<li><strong>Aufgabe:</strong> „Write a short story about a lighthouse
+keeper who finds a strange message in a bottle. Be creative.“, jeweils
+200 Tokens Antwort</li>
+</ul>
+<p>Warum eine Geschichte? Bei kreativen Aufgaben gibt es oft mehrere
+fast gleich gute Fortsetzungen. Schon beim ersten Wort schätzt das
+Modell „On“ auf 55 % und „**“ (den Beginn einer fett gesetzten
+Überschrift) auf 40 %. Solche knappen Entscheidungen sind genau die
+Stellen, an denen Abweichungen sichtbar werden.</p>
+<p>„Gleiche Antwort“ heißt in allen Tests: derselbe Text, Zeichen für
+Zeichen. Pro Test haben wir die Anfrage 30-mal gestellt, wenn nicht
+anders angegeben. Der Server lief eigens für diese Tests, ohne andere
+Nutzer. Gleichzeitige Anfragen gab es nur dort, wo wir sie absichtlich
+dazugeschaltet haben. Den Zwischenspeicher für bereits verarbeitete
+Prompts, der bei llama.cpp normalerweise eingeschaltet ist, haben wir
+nur in Schritt 6 und für eine Vergleichsfolge in Schritt 7
+eingeschaltet.</p>
+<p>Die genauen Zahlen gelten nur für dieses Setup. Zwei Gegenproben nach
+Schritt 7 prüfen, ob die Befunde auch mit einem anderen Modell und einer
+anderen Software gelten.</p>
+<h2 id="schritt-1-temperatur-07-der-normalfall">Schritt 1: Temperatur
+0,7 – der Normalfall</h2>
+<p>Ein Sprachmodell schreibt Token für Token. Für jeden Schritt
+berechnet es eine Wahrscheinlichkeit für jedes mögliche nächste Token,
+dann wird eines davon ausgewählt. Die Temperatur steuert, wie diese
+Auswahl ausfällt: Bei niedriger Temperatur gewinnt fast immer der
+Favorit, bei höherer kommen auch weniger wahrscheinliche Kandidaten zum
+Zug. Bei Temperatur null wird immer das wahrscheinlichste Token
+genommen.</p>
+<p>0,7 ist der Wert, den die Entwickler von Qwen3 für dieses Modell
+empfehlen. Ohne festen Seed holt sich die Software für jede Anfrage
+einen neuen Zufallswert.</p>
+<p><strong>Ergebnis: 30 Anfragen, 30 verschiedene Antworten.</strong>
+Meist trennen sich die Wege schon in den ersten zwei, drei Tokens; das
+längste gemeinsame Anfangsstück zweier Antworten war 26 Tokens lang. Mal
+beginnt die Geschichte mit einer Überschrift wie „The Keeper of the
+Hollow Light“, mal direkt mit „On the stormy coast of Northumberland …“
+oder „On the windswept cliffs of Seagull Point …“.</p>
+<p>Das ist kein Fehler, sondern genau so gewollt. Für einen Chatbot oder
+eine kreative Aufgabe ist Abwechslung erwünscht. Für ein Audit ist das
+natürlich nichts.</p>
+<h2 id="schritt-2-fester-seed-fast-aber-nicht-ganz">Schritt 2: Fester
+Seed – fast, aber nicht ganz</h2>
+<p>Der „Zufall“ beim Auswählen der Tokens kommt aus einem
+Zufallsgenerator, genauer: einem Pseudo-Zufallsgenerator. Das ist eine
+Formel, die aus einem Startwert, dem Seed, eine feste Zahlenfolge
+berechnet. Gleicher Seed, gleiche Folge, wie eine vorgedruckte Liste von
+Würfelergebnissen. Also: Seed auf 42 festlegen, Temperatur bleibt bei
+0,7.</p>
+<p><strong>Ergebnis: 24 von 30 Antworten identisch.</strong> Die übrigen
+sechs weichen erst spät ab, zwischen dem 78. und dem 173. Token, also
+mitten in der Geschichte.</p>
+<p>Zwei Details fallen auf. Erstens kamen alle sechs Abweichungen in den
+ersten sieben Läufen, danach 23-mal hintereinander dieselbe Antwort.
+Zweitens liefert ein frisch gestarteter Server mit demselben Seed eine
+weitere Variante, die in der Messreihe gar nicht vorkam. Die ist aber
+bei fünf Neustarts fünfmal exakt gleich.</p>
+<p>Wenn die Würfelergebnisse jedes Mal gleich sind, die Antworten aber
+trotzdem nicht, dann muss sich etwas anderes geändert haben: die
+Wahrscheinlichkeiten selbst, aus denen gewürfelt wird. Liegt eine
+Zufallszahl knapp an der Grenze zwischen zwei Tokens, reicht eine
+winzige Verschiebung, und ein anderes Token gewinnt. Woher solche
+Verschiebungen kommen, zeigt der nächste Schritt.</p>
+<h2
+id="schritt-3-temperatur-null-kein-zufall-mehr-trotzdem-verschieden">Schritt
+3: Temperatur null – kein Zufall mehr, trotzdem verschieden</h2>
+<p>Bei Temperatur null wird nicht mehr gewürfelt. Das Modell nimmt in
+jedem Schritt das wahrscheinlichste Token, der Seed spielt keine Rolle
+mehr. Das ist die Einstellung, die der Gesprächspartner vom Meetup
+verwendet hatte.</p>
+<p><strong>Ergebnis: 28 von 30 Antworten identisch, insgesamt drei
+Varianten.</strong> Seltener als bei Schritt 2, aber es passiert. Die
+erste Weiche liegt beim 103. Token:</p>
+<blockquote>
+<p>„…its light had dimmed with time. Elias <strong>had</strong> long
+since stopped using the original lamp …“</p>
+</blockquote>
+<blockquote>
+<p>„…its light had dimmed with time. Elias <strong>kept</strong> it
+running, not for the tourists or the ships …“</p>
+</blockquote>
+<p>An dieser Stelle hat das Modell zwei fast gleich starke Kandidaten:
+„had“ mit 42,7 % und „kept“ mit 41,9 %. Die beiden trennen 0,8
+Prozentpunkte. Wenn sich die Rechnung minimal verschiebt, wechselt der
+Favorit, und ab da schreibt das Modell eine andere Geschichte. Die
+dritte Variante zweigt zehn Tokens später an einer weiteren knappen
+Stelle ab: „coast“ mit 18,2 % gegen „ships“ mit 17,7 %.</p>
+<p><strong>Warum sollte sich eine deterministische Rechnung überhaupt
+verschieben?</strong> Wegen der Art, wie Computer mit Kommazahlen
+rechnen. Sie speichern Zahlen mit begrenzter Genauigkeit und runden nach
+jeder Operation. Dadurch hängt das Ergebnis von der Reihenfolge ab. Ein
+Beispiel im verbreiteten 32-Bit-Gleitkommaformat, in dem sich Zahlen um
+100 Millionen nur in Achterschritten darstellen lassen:</p>
+<ul>
+<li>(100.000.000 + 3) + 3 = <strong>100.000.000</strong>, weil jede 3
+für sich weggerundet wird</li>
+<li>100.000.000 + (3 + 3) = <strong>100.000.008</strong>, weil die 6 auf
+die nächste darstellbare Zahl aufgerundet wird</li>
+</ul>
+<p>Gleiche Zahlen, andere Klammern, anderes Ergebnis. Wie stark das
+Deep-Learning-Programme betrifft, haben Shanmugavelu et al. (2024)
+untersucht. Ein Sprachmodell mit 8 Milliarden Parametern rechnet für
+jedes Token grob 8 Milliarden Multiplikationen und Additionen. Die
+Grafikkarte verteilt sie auf viele Rechenkerne und fasst die Teilsummen
+danach zusammen. Wird anders aufgeteilt, wird anders gerundet, und am
+Ende steht eine minimal andere Wahrscheinlichkeit. Meistens ist das
+egal. An Stellen wie Token 103 nicht.</p>
+<p>Am Rande: Temperatur null ist bei Qwen3 nicht für jeden Betrieb
+vorgesehen. Für den Thinking-Modus steht in der Modellbeschreibung: „DO
+NOT use greedy decoding, as it can lead to performance degradation and
+endless repetitions.“ Wir haben ohne Thinking getestet; für diesen Modus
+nennt die Modellbeschreibung nur 0,7 als empfohlene Temperatur.</p>
+<p>Bleibt die eigentliche Frage: Warum rechnet derselbe Rechner mit
+demselben Modell überhaupt einmal so und einmal anders? Dem sind wir
+Ursache für Ursache nachgegangen.</p>
+<h2 id="schritt-4-würfelt-die-grafikkarte">Schritt 4: Würfelt die
+Grafikkarte?</h2>
+<p>Die naheliegende Erklärung lautet: Auf der Grafikkarte rechnen
+tausende Kerne parallel. Wer zuerst fertig ist, wird zuerst addiert, bei
+jedem Lauf in anderer Reihenfolge. Das klingt plausibel. Thinking
+Machines kommt allerdings zu dem Schluss, dass es für die Berechnung
+eines Sprachmodells typischerweise nicht zutrifft: Der übliche Rechenweg
+enthält keine Schritte, bei denen die Reihenfolge der Additionen davon
+abhängt, welcher Kern zuerst fertig ist.</p>
+<p>Das lässt sich prüfen. Wir haben 30-mal nur den Prompt verarbeiten
+lassen und uns jeweils die Wahrscheinlichkeiten der drei besten
+Kandidaten für das erste Token ausgeben lassen, mit allen
+Nachkommastellen.</p>
+<p><strong>Ergebnis: 30-mal exakt dieselben Werte, bis in die letzte
+Stelle.</strong></p>
+<p>Auch die vollständige Generierung ist reproduzierbar, wenn die
+Ausgangslage gleich ist: Ein frisch gestarteter Server lieferte bei zehn
+Neustarts zehnmal dieselbe Geschichte, alle 200 Tokens.</p>
+<p>Andere Zahlen gibt es nur, wenn sich der Rechenweg ändert. Ein
+Beispiel ist Flash Attention, ein alternativer Algorithmus für einen
+Teil der Rechnung. Schaltet man ihn ab, verschiebt sich in einem Test
+mit einem kürzeren Prompt die Wahrscheinlichkeit des Favoriten von 55,8
+% auf 55,1 %. Aber auch dann kommen bei jedem Lauf dieselben Werte
+heraus.</p>
+<p>Die Grafikkarte würfelt also nicht. Wenn die Antworten trotzdem
+variieren, muss sich der Rechenweg zwischen den Anfragen ändern. Was
+kann ihn ändern? Drei Kandidaten: andere Anfragen, die gleichzeitig
+laufen, der Zwischenspeicher für bereits verarbeitete Prompts und die
+Vorgeschichte des Servers.</p>
+<h2 id="schritt-5-die-anderen-nutzer">Schritt 5: Die anderen Nutzer</h2>
+<p>Ein Server bedient normalerweise viele Nutzer gleichzeitig. Statt die
+Anfragen nacheinander abzuarbeiten, fasst er sie zu einem Stapel (Batch)
+zusammen und rechnet sie gemeinsam. Das ist deutlich effizienter.
+Thinking Machines hat gezeigt, wo das Problem liegt: Je nach Größe des
+Stapels teilen die Rechenbausteine die Arbeit unterschiedlich auf.
+Gleiche Rechnung, andere Aufteilung, andere Rundung. Auch in llama.cpp
+hängt die Aufteilung laut Quellcode (Vulkan-Teil) von der Stapelgröße
+ab.</p>
+<p>Der Test: ein Server mit vier Plätzen für gleichzeitige Anfragen, für
+jede Messreihe frisch gestartet. Einmal 30 Anfragen nacheinander. Einmal
+30 Anfragen, bei denen jedes Mal drei weitere Anfragen gleichzeitig
+starten, so wie auf einem Server, den sich mehrere Nutzer teilen.</p>
+<ul>
+<li><strong>Allein:</strong> Die häufigste Antwort kam 25 von 30 Mal,
+insgesamt gab es 6 Varianten. Ab Lauf 11 waren aber alle 20 Antworten
+identisch.</li>
+<li><strong>Mit drei parallelen Anfragen:</strong> Die häufigste Antwort
+kam nur 15 von 30 Mal, ebenfalls 6 Varianten. Und auch ab Lauf 11 gab es
+noch 3 Varianten, die häufigste nur 11 von 20 Mal.</li>
+</ul>
+<p>Ohne parallele Anfragen wackeln nur die ersten Läufe, dann ist die
+Antwort stabil. Warum das so ist, dazu gleich mehr. Mit parallelen
+Anfragen stabilisiert sie sich in 30 Läufen nicht.</p>
+<p>Ganz sauber getrennt ist das hier allerdings nicht. Die fremden
+Anfragen gehören auch zur Vorgeschichte des Servers, und die spielt eine
+eigene Rolle (Schritt 7). Den Effekt des Stapels allein zeigt die
+Gegenprobe mit vLLM weiter unten.</p>
+<p>Genau das ist die Lage bei einer Cloud-API. Dort teilt man sich die
+Server mit unzähligen anderen Nutzern, und wie die Anfragen gestapelt
+werden, sieht man von außen nicht.</p>
+<p>Nebenbei: Schon die Zahl der Plätze verändert die Antwort. Ein frisch
+gestarteter Server mit einem Platz lieferte bei der allerersten Anfrage
+jedes Mal dieselbe Geschichte (15 von 15 Neustarts). Mit zwei oder vier
+Plätzen kam eine andere Geschichte, aber auch sie bei jedem Neustart
+dieselbe (je 5 Neustarts). Zwei und vier Plätze lieferten sogar dieselbe
+Geschichte. Die Konfiguration des Servers bestimmt also mit, welche
+Antwort man bekommt.</p>
+<h2 id="schritt-6-der-zwischenspeicher-eine-falsche-fährte">Schritt 6:
+Der Zwischenspeicher – eine falsche Fährte</h2>
+<p>Server merken sich bereits verarbeitete Prompts in einem
+Zwischenspeicher, dem Cache. Kommt dieselbe Anfrage noch einmal, muss
+nur der Rest neu berechnet werden. Unsere Vermutung: Mal wird der Prompt
+komplett neu gerechnet, mal zum Teil aus dem Cache genommen, und diese
+unterschiedliche Aufteilung erzeugt unterschiedliche Rundungen.</p>
+<p><strong>Ergebnis mit eingeschaltetem Cache: Die häufigste Antwort kam
+nur noch 15 von 30 Mal.</strong> Und das Muster ist auffällig: Ab dem
+achten Lauf wechseln sich zwei Antworten streng ab, Lauf für Lauf.</p>
+<p>Das sieht nach einer klaren Erklärung aus. Also haben wir
+nachgesehen, wie viel vom Prompt der Server bei jeder Anfrage
+tatsächlich neu berechnet: ab der zweiten Anfrage jedes Mal genau ein
+Token, die übrigen 32 kommen aus dem Cache. Immer gleich. Und trotzdem
+wechseln die Antworten.</p>
+<p>Unsere Vermutung war also falsch. Der Cache verändert zwar das
+Muster, aber nicht dadurch, dass der Prompt mal so, mal so aufgeteilt
+wird. Etwas anderes ändert sich von Anfrage zu Anfrage. Die Frage ist:
+was?</p>
+<h2 id="schritt-7-der-server-hat-ein-gedächtnis">Schritt 7: Der Server
+hat ein Gedächtnis</h2>
+<p>Wenn es kein Zufall ist, müsste sich das Ganze wiederholen lassen.
+Also haben wir den Server frisch gestartet, ihm 16-mal dieselbe Anfrage
+geschickt und das Ganze dreimal wiederholt, jedes Mal nach einem
+Neustart. Jeder Buchstabe steht für eine der unterschiedlichen
+Geschichten:</p>
+<pre><code>Neustart 1:  A A B C D C E E E D D D D D D D
+Neustart 2:  A A B C D C E E E D D D D D D D
+Neustart 3:  A A B C D C E E E D D D D D D D</code></pre>
+<p><strong>Dreimal exakt dieselbe Folge.</strong> Mit eingeschaltetem
+Cache ergibt sich ein anderes Muster, aber auch das ist bei jedem
+Neustart wieder identisch:</p>
+<pre><code>A A F A A B E E E F E F E F E F</code></pre>
+<p>E und F sind übrigens genau die beiden Antworten, die sich in Schritt
+6 abgewechselt haben. Dort hatte der Server vorher schon andere
+Messreihen abgearbeitet. Deshalb der andere Anfang, aber dasselbe
+Ende.</p>
+<p>Das ist der Kern der Sache. Bei Anfragen nacheinander ist der Server
+als Ganzes vollkommen deterministisch. Aber er hat ein Gedächtnis:
+Welche Antwort er gibt, hängt davon ab, was er vorher gerechnet hat. Die
+dritte Anfrage bekommt eine andere Geschichte als die erste, obwohl sie
+Zeichen für Zeichen gleich ist. Und zwar bei jedem Durchlauf wieder
+dieselbe andere.</p>
+<p>Wo steckt dieses Gedächtnis? Zwei Gegenproben:</p>
+<ul>
+<li><strong>Den Platz der Anfrage auf dem Server vor jeder Anfrage
+leeren</strong> (dafür bietet llama.cpp eine eigene Funktion): hilft
+nicht. 15 Anfragen, fünf verschiedene Antworten.</li>
+<li><strong>Für jede Anfrage ein neues Programm starten</strong>, das
+das Modell lädt, die Antwort erzeugt und sich wieder beendet: 15
+Anfragen, 15-mal dieselbe Antwort.</li>
+</ul>
+<p>Das Gedächtnis steckt also nicht in den gespeicherten Inhalten,
+sondern irgendwo im Zustand des laufenden Programms. Unsere Vermutung,
+ausdrücklich nicht gemessen: Je nach Vorgeschichte landet eine Anfrage
+an einer anderen Stelle im internen Speicher des Servers. Dadurch ändert
+sich die Länge eines Zwischenergebnisses, und im Quellcode der
+Vulkan-Version hängt die Aufteilung der Rechnung genau von dieser Länge
+ab. Andere Aufteilung, andere Rundung, andere Geschichte.</p>
+<p>Ganz verstanden haben wir es nicht. Zur Gegenprobe lief der Server
+nur auf dem Prozessor, ganz ohne Grafikkarte: 24 Anfragen nach zwei
+Neustarts, 24-mal dieselbe Antwort. In diesem Test zeigte sich das
+Gedächtnis also nur, wenn die Grafikkarte mitrechnete. Das passt zu
+unserer Vermutung, bewiesen ist sie damit nicht.</p>
+<p>Auf dem Weg dorthin sind wir selbst in eine Falle getappt. Die
+übliche Einstellung, alle Schichten des Modells auf dem Prozessor zu
+rechnen, hält die Grafikkarte nicht vollständig heraus: Rechenschritte
+mit 32 oder mehr Tokens auf einmal lagert llama.cpp trotzdem dorthin
+aus, und unser Prompt hat 33. Im ersten Kontrolllauf zeigte sich das
+Gedächtnis deshalb ebenfalls. Erst mit ausdrücklich abgeschalteter
+Grafikkarte war es verschwunden.</p>
+<p>Praktisch heißt das: Bei vielen Nutzern gehören deren Anfragen zur
+Vorgeschichte, und die kann niemand vorhersagen. Für den Einzelnen sieht
+das aus wie Zufall.</p>
+<p>Damit lassen sich beide Seiten vom Meetup versöhnen: Die Mathematik
+ist deterministisch. Nur hängt das Ergebnis von mehr ab als vom eigenen
+Prompt.</p>
+<h2 id="gegenprobe-ein-ganz-anderes-modell">Gegenprobe: ein ganz anderes
+Modell</h2>
+<p>Ein Modell ist kein Beweis. Deshalb haben wir die Kernaussagen an
+einem zweiten Modell geprüft, das sich in fast allem unterscheidet:
+gpt-oss-120b von OpenAI. Mit 117 Milliarden Parametern ist es gut
+vierzehnmal so groß wie Qwen3-8B, anders komprimiert und anders gebaut.
+Es ist ein sogenanntes Mixture-of-Experts-Modell, bei dem für jedes
+Token nur ein Teil des Netzes rechnet. Gleicher Rechner, gleiche
+Software, gleiche Aufgabe, Temperatur null. Das Modell denkt vor der
+Antwort kurz nach. Das haben wir auf die niedrigste Stufe gestellt, dann
+ist es ein einziger Satz.</p>
+<ul>
+<li><strong>Laufender Server, 30 Anfragen nacheinander:</strong> 26
+verschiedene Antworten, die häufigste kam dreimal. Anders als bei Qwen
+pendelt sich nichts ein.</li>
+<li><strong>Frischer Server für jede Anfrage, 10 Anfragen:</strong>
+10-mal dieselbe Antwort.</li>
+<li><strong>16 Anfragen nach einem Neustart, dreimal
+wiederholt:</strong> 16 verschiedene Antworten, aber bei allen drei
+Neustarts exakt dieselbe Folge. Es ist sogar dieselbe Folge wie bei den
+ersten 16 Anfragen des ersten Tests.</li>
+</ul>
+<p>Die meisten Abweichungen beginnen schon im ersten Satz der
+Geschichte: „The lighthouse <strong>at Grayhaven</strong> had stood for
+a century …“ oder „The lighthouse <strong>on Gull’s Point</strong> had
+stood for a century …“.</p>
+<p>Das Muster ist dasselbe wie bei Qwen, nur deutlich stärker: Der
+Server als Ganzes ist deterministisch, die einzelne Antwort hängt von
+seiner Vorgeschichte ab. Warum gpt-oss so viel empfindlicher reagiert,
+haben wir nicht untersucht. Größe, Kompression und Bauart unterscheiden
+sich gleichzeitig, das lässt sich mit diesem Test nicht
+auseinanderhalten.</p>
+<h2 id="gegenprobe-eine-andere-software">Gegenprobe: eine andere
+Software</h2>
+<p>Hat jeder Server so ein Gedächtnis? Und gibt es Software, die das
+Problem löst? vLLM, eine verbreitete Server-Software, hat dafür einen
+eigenen Modus: Er soll die Rechnung immer gleich aufteilen, egal wie
+viele andere Anfragen im selben Stapel stecken. Für meinen Mini-PC ist
+dieser Modus laut vLLM nicht vorgesehen, also kam ein zweiter Rechner
+dazu: ein PC mit einer NVIDIA RTX 4070. Darauf lief vLLM mit demselben
+Qwen3-8B, allerdings in einer anderen komprimierten Fassung (AWQ), die
+vLLM direkt unterstützt. Gleiche Aufgabe, Temperatur null.</p>
+<p>Zuerst eine Überraschung: 216 Anfragen und immer dieselbe Geschichte.
+Nacheinander, mit drei parallelen Anfragen, nach Neustarts, mit und ohne
+den deterministischen Modus. Sogar beide Modi lieferten Zeichen für
+Zeichen denselben Text.</p>
+<p>Das hat uns misstrauisch gemacht, denn die beiden Modi rechnen
+nachweislich mit unterschiedlichen Rechenbausteinen. Also haben wir
+nicht nur den Text verglichen, sondern die Wahrscheinlichkeit jedes
+einzelnen Tokens, bis in die letzte Stelle:</p>
+<ul>
+<li><strong>Nacheinander:</strong> in beiden Modi 10 von 10
+identisch.</li>
+<li><strong>Mit drei parallelen Anfragen:</strong> Im normalen Modus
+verschieben sich die Zahlen in 9 von 10 Läufen bei rund 180 von 200
+Tokens, im zehnten bei 81. Im deterministischen Modus 10 von 10
+identisch.</li>
+<li><strong>Nach einem Neustart:</strong> in beiden Modi identisch mit
+dem ersten Start.</li>
+</ul>
+<p>Drei Erkenntnisse:</p>
+<ul>
+<li><strong>Gleicher Text heißt nicht gleiche Rechnung.</strong> Im
+normalen Modus verschieben die parallelen Anfragen die Zahlen meist fast
+überall. Der Favorit hat dabei nie gewechselt. Ohne parallele Anfragen
+lag die knappste Stelle bei 34,9 % gegen 34,4 %. Mit parallelen Anfragen
+lagen die beiden Favoriten an zwei Stellen in einzelnen Läufen sogar
+exakt gleichauf (je 34,6 % und je 50,0 %). Bei einem Gleichstand muss
+sich das System für eines entscheiden, und das war in allen Läufen
+dasselbe Token. Das war also knapp. Mit einem anderen Prompt oder einer
+längeren Antwort kann das anders ausgehen.</li>
+<li><strong>Der deterministische Modus wirkt.</strong> Mit ihm ändern
+parallele Anfragen nichts mehr, nicht einmal in der letzten Stelle (10
+von 10 Läufen). Einer der beiden Gleichstände (50 % zu 50 %) besteht
+dort in jedem Lauf, entschieden wird immer gleich.</li>
+<li><strong>Das Gedächtnis aus Schritt 7 trat bei vLLM nicht
+auf.</strong> Nacheinander gestellte Anfragen waren bit-identisch, auch
+ohne deterministischen Modus und obwohl der Zwischenspeicher für Prompts
+eingeschaltet war (bei vLLM der Standard). Es ist also keine Eigenschaft
+jedes LLM-Servers. Woran es liegt, lässt dieser Vergleich allein offen:
+Software, Grafikkarte (NVIDIA statt AMD) und Komprimierung (AWQ statt
+Q4_K_M) unterscheiden sich gleichzeitig. Der Nachtest unten grenzt es
+weiter ein.</li>
+</ul>
+<p>Bezahlt wird das allerdings mit Zeit: Statt rund 2,5 Sekunden
+brauchte eine einzelne Anfrage im deterministischen Modus rund 30, etwa
+zwölfmal so lange. Thinking Machines nennt einen kleineren Aufschlag (55
+statt 26 Sekunden), gemessen allerdings für 1.000 Anfragen zusammen und
+in einem anderen Aufbau. Die Zahlen lassen sich nicht direkt
+vergleichen.</p>
+<p><strong>Nachtest mit einem kleinen Modell.</strong> Zwei Fragen
+blieben offen: Woher kommt der große Aufschlag? Und liegt das fehlende
+Gedächtnis an der Software? Also haben wir mit einem dritten Modell
+nachgemessen, Qwen3-1.7B. Es ist klein genug, um es ohne Komprimierung
+zu rechnen. Damit rechneten alle mit denselben Gewichten: llama.cpp auf
+dem Mini-PC (über Vulkan), llama.cpp auf der RTX 4070 (über NVIDIAs
+Schnittstelle CUDA) und vLLM auf der RTX 4070 in beiden Modi. Insgesamt
+2.264 Anfragen, diesmal fast alle mit der Wahrscheinlichkeit jedes
+Tokens.</p>
+<ul>
+<li><strong>Der Aufschlag:</strong> Ohne Komprimierung brauchte der
+deterministische Modus 3,25 statt 1,62 Sekunden pro Anfrage, also das
+Doppelte. Das spricht dafür, dass die zwölffache Zeit vor allem an der
+Komprimierung liegt: Für AWQ-Modelle schaltet vLLM in diesem Modus seine
+schnellen Rechenbausteine ab, weil sie die Rechnung nicht immer gleich
+aufteilen. Bewiesen ist das nicht, das neue Modell ist ja auch
+kleiner.</li>
+<li><strong>Das Gedächtnis:</strong> llama.cpp auf der RTX 4070 hatte
+keins. 416 Anfragen nacheinander und nach Neustarts, alle bis in die
+letzte Stelle gleich. Auf dem Mini-PC schon, auch ohne Komprimierung:
+Nach jedem Neustart unterscheiden sich die Wahrscheinlichkeiten der
+ersten vier Anfragen, ab der fünften bleiben sie gleich. Den Text hat
+das bei diesem Modell nicht verändert, keine Stelle war knapp genug. Am
+Programm als Ganzem und an der Komprimierung liegt das Gedächtnis also
+nicht. In unseren Tests trat es nur auf, wenn über Vulkan auf der
+AMD-Grafik gerechnet wurde. Ob es am Vulkan-Teil von llama.cpp liegt, am
+Grafiktreiber oder an der Grafik selbst, haben wir nicht mehr
+untersucht.</li>
+<li><strong>Parallele Anfragen</strong> verschoben auch hier die Zahlen,
+auf beiden Rechnern und mit beiden Programmen. Auf dem Mini-PC änderte
+sich dabei auch der Text. Nur im deterministischen Modus von vLLM blieb
+alles gleich.</li>
+</ul>
+<h2 id="was-hilft">Was hilft?</h2>
+<p>Es gibt drei Wege. Welcher passt, hängt davon ab, wie viel Kontrolle
+man über die Technik hat.</p>
+<p><strong>1. Volle Kontrolle: ein frischer Prozess pro
+Anfrage.</strong> Das ist der Weg, der in unseren Tests ausnahmslos
+funktioniert hat, mit allen drei Modellen und bei Qwen3-8B mit festem
+Seed sogar bei Temperatur 0,7. Dazu gehört:</p>
+<ul>
+<li>jede Anfrage in einem neu gestarteten Prozess, ohne
+Vorgeschichte</li>
+<li>keine gleichzeitigen Anfragen</li>
+<li>exakt dieselbe Software, dasselbe Modell, dieselbe
+Konfiguration</li>
+</ul>
+<p>Der letzte Punkt ist wichtiger, als er klingt. Schon Flash Attention
+an oder aus verschiebt die Zahlen (Schritt 4), und die Zahl der Plätze
+auf dem Server ändert, welche Antwort herauskommt (Schritt 5). Bei einem
+Update der Software oder des Grafiktreibers ist dasselbe zu erwarten;
+getestet haben wir das nicht. Der Haken an diesem Weg: Das Modell muss
+für jede Anfrage neu geladen werden, und mehrere Nutzer gleichzeitig
+gehen nicht. Für einen Produktivbetrieb ist das kaum praktikabel, für
+die Nachprüfung einzelner Ergebnisse schon.</p>
+<p><strong>2. Software, die dafür gebaut ist.</strong> vLLM hat den
+deterministischen Modus aus der Gegenprobe (VLLM_BATCH_INVARIANT=1),
+SGLang einen vergleichbaren
+(<code>--enable-deterministic-inference</code>). Thinking Machines hat
+mit diesem Ansatz aus 80 verschiedenen Antworten eine gemacht: 1.000 von
+1.000 identisch. Auch in unserer Gegenprobe hat der Modus gewirkt,
+kostet aber Zeit: bei uns das Doppelte bis Zwölffache.</p>
+<p>Die Einschränkung: Der Modus ist laut vLLM noch im Beta-Stadium und
+läuft derzeit nur auf NVIDIA-GPUs ab der Ampere-Generation, auf AMDs
+Rechenzentrums-Beschleunigern (Instinct) und auf Intel-Beschleunigern
+mit Triton. Mein Mini-PC gehört nicht dazu, und der Modus von SGLang
+startet auf dieser Grafikeinheit laut einem offenen Fehlerbericht
+ebenfalls nicht.</p>
+<p><strong>3. Cloud-APIs: keine Garantie.</strong> Bei OpenAI gibt es
+einen Seed-Parameter, laut Dokumentation aber „Beta“, „best effort“ und
+ausdrücklich: „Determinism is not guaranteed.“ Anthropic geht den
+umgekehrten Weg: In der API-Version vom 21. Oktober 2026 führt die
+Angabe einer Temperatur zu einem Fehler, und laut Dokumentation ersetzt
+keine andere Einstellung sie. Neuere Claude-Modelle akzeptierten schon
+vorher nur den Standardwert. Wer eine Cloud-API nutzt, teilt sich die
+Server mit anderen (Schritt 5) und hat keinen Einfluss auf Konfiguration
+und Updates. Garantieren lässt sich Reproduzierbarkeit dort nicht.</p>
+<p><strong>Und für das Audit vom Meetup?</strong> Dort lautet meine
+Empfehlung: aufzeichnen statt nachrechnen. Prompt, Modell mit genauer
+Version, Parameter, Zeitpunkt und die vollständige Antwort speichern.
+Nachvollziehbar ist ein Ergebnis dann, weil man belegen kann, wie es
+entstanden ist. Nicht, weil man es auf Knopfdruck noch einmal erzeugen
+kann. Wer zusätzlich nachrechnen können will, braucht Weg 1 oder 2 und
+muss dafür Software und Hardware einfrieren.</p>
+<h2 id="fazit">Fazit</h2>
+<p>Gleiche Frage, andere Antwort: Bei Temperatur null ist das kein
+Zufall und kein Fehler der Grafikkarte. Die Rechnung selbst ist
+deterministisch. Aber ihr Ergebnis hängt von mehr ab als vom Prompt: von
+anderen Anfragen im selben Stapel, von der Konfiguration des Servers und
+bei llama.cpp mit Vulkan sogar davon, was der Server vorher gerechnet
+hat. An knappen Stellen reichen winzige Rundungsunterschiede, die sich
+durch die Rechnung fortpflanzen, und das Modell schreibt eine andere
+Geschichte.</p>
+<p>Temperatur null oder ein fester Seed schalten nur den gewollten
+Zufall ab. Für Reproduzierbarkeit reicht das nicht. Wer echte
+Reproduzierbarkeit braucht, muss die gesamte Kette kontrollieren. Alle
+anderen sollten nicht darauf bauen, dass dieselbe Frage dieselbe Antwort
+liefert, und lieber festhalten, welche Antwort sie bekommen haben.</p>
+<p>Die Messskripte und alle Rohdaten liegen auf GitHub:
+https://github.com/ancroo/experiment-llm-determinism</p>
+<p>Wer einen Fehler findet oder die Tests auf anderer Hardware
+nachmisst: Ich freue mich über Hinweise.</p>
+<h2 id="quellen">Quellen</h2>
+<ul>
+<li>Horace He / Thinking Machines Lab (2025): Defeating Nondeterminism
+in LLM Inference.
+https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/</li>
+<li>Jiayi Yuan et al. (2025): Understanding and Mitigating Numerical
+Sources of Nondeterminism in LLM Inference. NeurIPS 2025,
+arXiv:2506.09501. https://arxiv.org/abs/2506.09501</li>
+<li>Ingonyama (2024): Solving Reproducibility Challenges in Deep
+Learning and LLMs: Our Journey.
+https://www.ingonyama.com/post/solving-reproducibility-challenges-in-deep-learning-and-llms-our-journey</li>
+<li>Sanjif Shanmugavelu et al. (2024): Impacts of floating-point
+non-associativity on reproducibility for HPC and deep learning
+applications. SC24-Workshops, IEEE.
+https://doi.org/10.1109/SCW63240.2024.00028</li>
+<li>Qwen3-8B Modellbeschreibung:
+https://huggingface.co/Qwen/Qwen3-8B</li>
+<li>gpt-oss-120b Modellbeschreibung:
+https://huggingface.co/openai/gpt-oss-120b</li>
+<li>vLLM, Batch Invariance:
+https://docs.vllm.ai/en/latest/features/batch_invariance.html</li>
+<li>SGLang, Deterministic Inference:
+https://docs.sglang.io/advanced_features/deterministic_inference.html</li>
+<li>SGLang Issue #48968 (Strix Halo):
+https://github.com/sgl-project/sglang/issues/48968</li>
+<li>OpenAI API Reference, Parameter seed:
+https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create/</li>
+<li>Anthropic, Migration zur API-Version 2026-10-21:
+https://platform.claude.com/docs/en/api/migration-2026-10-21</li>
+</ul>
+</body>
+</html>
